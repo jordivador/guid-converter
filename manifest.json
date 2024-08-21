@@ -1,0 +1,10 @@
+{
+  "manifest_version": 3,
+  "name": "GUID Converter",
+  "version": "1.0",
+  "description": "Convert GUIDs between formats.",
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "permissions": []
+}
