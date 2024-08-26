@@ -14,7 +14,7 @@ To install this extension locally:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/jordivador/guid-converter-extension.git
+   git clone https://github.com/jordivador/guid-converter.git
    ```
 2. Open Chrome and navigate to chrome://extensions/.
 3. Enable "Developer mode" by toggling the switch in the top-right corner.
