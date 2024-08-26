@@ -5,8 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     inputField.focus();
 
-    function convertGUID() {
-        const x = inputField.value;
+    function convertSingleGUID(x) {
         let result = '';
 
         if (x.length >= 9 && x[8] === '-') {
@@ -24,15 +23,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 x.slice(20)
             ).toUpperCase(); // Convert to uppercase
         } else {
-            result = "Wrong parameters, usage examples:\n\n" +
-                     '"0ab3bbb46a7ae6119d1d5d053712f664"\n' +
-                     '"B4BBB30A-7A6A-11E6-9D1D-5D053712F664"';
+            result = "Invalid GUID format.";
         }
 
-        outputField.textContent = result;
+        return result;
+    }
 
-        // Copy the result to the clipboard
-        navigator.clipboard.writeText(result).then(() => {
+    function convertGUIDs() {
+        const input = inputField.value.trim();
+        const guids = input.split(/[\s,]+/); // Split by commas or whitespace/newlines
+        let results = [];
+
+        for (let guid of guids) {
+            let converted = convertSingleGUID(guid);
+            results.push(converted);
+        }
+
+        outputField.textContent = results.join('\n');
+
+        // Copy the results to the clipboard
+        navigator.clipboard.writeText(results.join('\n')).then(() => {
             console.log('Output copied to clipboard');
         }).catch(err => {
             console.error('Failed to copy to clipboard', err);
@@ -40,12 +50,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Listen for clicks on the convert button
-    convertButton.addEventListener('click', convertGUID);
+    convertButton.addEventListener('click', convertGUIDs);
 
     // Listen for Enter key presses in the input field
     inputField.addEventListener('keydown', function(event) {
         if (event.key === 'Enter') {
-            convertGUID();
+            convertGUIDs();
         }
     });
 });
